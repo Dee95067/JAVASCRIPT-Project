@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+        }
+        body{
+            background-color: antiquewhite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .Quiz-container{
+            border: 1px solid black;
+            border-radius: 10px ;
+            box-shadow: 0 0 10px 0 black;
+            width: 500px;
+            height: 350px;
+            background-color: white;
+            position: relative;
+        }
+        #quiz-question{
+            font-size: 1.5rem;
+            padding: 20px;
+            text-align: center;
+        }
+        ul{
+            list-style: none;
+            margin-left: 30px;
+
+        }
+        li{
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            padding: 5px;
+            cursor: pointer;
+        }
+        #submit{
+            background-color: rgb(189, 231, 22);
+            border: none;
+            color:black;
+            font-size: 1.2rem;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 5px;
+            border-radius: 0 0 10px 10px;
+
+        }
+        #submit:hover{
+            background-color:#f1c40e;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="Quiz-container">
+        <h2 id="quiz-question">
+           Question tag
+        </h2>
+        <ul>
+            <li>
+                <input type="radio" class="answer" id="optoin-a" name="Quiz-option">
+                <label for="optoin-a" id="text_option_a" >Option A</label>
+            </li>
+            <li>
+                <input type="radio" class="answer" id="optoin-b" name="Quiz-option">
+                <label for="optoin-b" id="text_option_b" >Option B</label>
+            </li>
+            <li>
+                <input type="radio" class="answer" id="optoin-c" name="Quiz-option">
+                <label for="optoin-c" id="text_option_c" >Option C</label>
+            </li>
+            <li>
+                <input type="radio" class="answer" id="optoin-d" name="Quiz-option">
+                <label for="optoin-d" id="text_option_d" >Option D</label>
+            </li>
+        </ul>
+        <button id="submit">Submit</button>
+
+    </div>
+     <script>
+        const quiz = [
+            {
+                question: "Q.1 What is the most used programming language int 2023 ?",
+                ans1text: "Java",
+                ans2text: "C",
+                ans3text: "Python",
+                ans4text: "JavaScript",
+                answer: "JavaScript",
+            },
+            {
+                question: "Q.2 Who is the President of USA ?",
+                ans1text: "joe Biden",
+                ans2text: "Donald Trump",
+                ans3text: "Brack Ohmaba",
+                ans4text: "George Bush",
+                answer: "joe Biden",
+            },
+            {
+                question: "Q.3 What does HTML stand for ?",
+                ans1text: "Hyper markup language",
+                ans2text: "Casecadsing style sheet",
+                ans3text: "Hyper text Markup Language",
+                ans4text: "Heli terminal Motor Lamborginize",
+                answer:   "Hyper text Markup Language",
+            },
+            {
+                question: "Q.4 What year was JavaScript lanched ?",
+                ans1text: "1996",
+                ans2text: "1995",
+                ans3text: "1994",
+                ans4text: "None of the above",
+                answer: "1995",
+            },
+            {
+                question: "Q.5 Who is the important language in today ?",
+                ans1text: "C",
+                ans2text: "Java",
+                ans3text: "Python",
+                ans4text: "C++",
+                answer: "Java",
+            }
+        ]
+        const question=document.getElementById("quiz-question");
+        console.log(question);
+        console.log(question.textContent);
+        const option_a=document.getElementById("text_option_a");
+        const option_b=document.getElementById("text_option_b");
+        const option_c=document.getElementById("text_option_c");
+        const option_d=document.getElementById("text_option_d");
+         
+        const answerElement = document.querySelectorAll(".answer");
+
+        console.log(option_a);
+        console.log(option_b);
+        console.log(option_c);
+        console.log(option_d);
+        console.log(option_a.textContent);
+        console.log(option_b.textContent);
+        console.log(option_c.textContent);
+        console.log(option_d.textContent);
+        
+        const submit = document.getElementById("submit");
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        console.log(quiz[currentQuestion].question);
+        console.log(quiz[currentQuestion].ans1text);
+        console.log(quiz[currentQuestion].ans2text);
+        console.log(quiz[currentQuestion].ans3text);
+        console.log(quiz[currentQuestion].ans4text);
+
+        question.textContent = quiz[currentQuestion].question;
+        option_a.textContent = quiz[currentQuestion].ans1text;
+        option_b.textContent = quiz[currentQuestion].ans2text;
+        option_c.textContent = quiz[currentQuestion].ans3text;
+        option_d.textContent = quiz[currentQuestion].ans4text;
+
+        console.log("answer element", answerElement);
+               
+        submit.addEventListener("click",() =>{
+            const checkedAns = document.querySelector('input[type="radio"]:checked')
+        // answerElement.forEach((answer) => {
+          console.log(checkedAns);
+        //   console.log(checkedAns.nextElementSibling.textContent);
+          if(checkedAns===null){
+            alert("Please select the Answer");
+          }
+          else{
+            if(checkedAns.nextElementSibling.textContent === quiz[currentQuestion].answer){
+                score++;
+            } 
+            checkedAns.checked = false;
+            currentQuestion++;
+
+            if(currentQuestion < quiz.length){
+                question.textContent = quiz[currentQuestion].question;
+                option_a.textContent = quiz[currentQuestion].ans1text;
+                option_b.textContent = quiz[currentQuestion].ans2text;
+                option_c.textContent = quiz[currentQuestion].ans3text;
+                option_d.textContent = quiz[currentQuestion].ans4text;
+                checkedAns.checked = false;
+
+            }
+            else{
+                alert("Your scor is " + score + " out of " + quiz.length);
+                location.reload();
+
+            }
+          }
+        });
+     </script>
+</body>
+</html>
